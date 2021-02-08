@@ -50,13 +50,26 @@ app.post('/send-email', (req, res) => {
             pass: 'qualybrasilapp@10',
         },
     })
+
+    let pastParams = {}
+    if (message.indexOf('<') !== -1) {
+        pastParams = {
+            html: message,
+        }
+    } else {
+        pastParams = {
+            text: message, // Plain text body
+        }
+    }
+
     transport.sendMail(
         {
             from: 'naoresponda.qualybrasil@gmail.com', // Sender address
             to: email, // List of recipients
             subject: 'Coleta realizada - QualyBrasil Lavanderia', // Subject line
-            text: message, // Plain text body
+            ...pastParams,
         },
+
         function (err, info) {
             if (err) {
                 res.status(400).send({
