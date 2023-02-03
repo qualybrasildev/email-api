@@ -46,8 +46,8 @@ app.post('/send-email', (req, res) => {
         host: 'smtp.gmail.com',
         port: 587,
         auth: {
-            user: 'naoresponda.qualybrasil@gmail.com',
-            pass: 'qualybrasilapp@10',
+            user: process.env.GMAIL_USERNAME,
+            pass: process.env.GMAIL_PASSWORD,
         },
     })
 
@@ -64,7 +64,7 @@ app.post('/send-email', (req, res) => {
 
     transport.sendMail(
         {
-            from: 'naoresponda.qualybrasil@gmail.com', // Sender address
+            from: process.env.GMAIL_USERNAME, // Sender address
             to: email, // List of recipients
             subject: 'Coleta realizada - QualyBrasil Lavanderia', // Subject line
             ...pastParams,
