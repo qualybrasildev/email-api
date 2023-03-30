@@ -85,7 +85,7 @@ app.post('/send-email', (req, res) => {
             } else {
                 res.status(200).send({
                     success: true,
-                    message: `E-mail enviado!`,
+                    message: `O e-mail foi enviado!`,
                 })
             }
         }
